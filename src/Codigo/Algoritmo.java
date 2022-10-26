@@ -14,5 +14,8 @@ public class Algoritmo {
     /**/
     /** ALG EXHAUSTIVO  */
     
+    private static Triangulo exhaustivo (Punto[] puntos, int i, int d){
+        return null;
+    }
     /** ALG DYV */
 }
