@@ -10,7 +10,7 @@ package Codigo;
  * @author Ramso
  */
 public class Algoritmo {
-    
+    /* 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 */
     
     /** ALG EXHAUSTIVO  */
     
