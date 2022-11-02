@@ -15,7 +15,7 @@ public class Algoritmo {
                 }
             }
         }
-        return null;
+        return dmin;
     }
 
     /** ALG DYV */
