@@ -14,7 +14,7 @@ public class Linea {
     }
     public Double longitud() {
         if (this.longitud==null) {
-            this.longitud=p1.distancia(p2)
+            this.longitud=p1.distancia(p2);
         }
         return longitud;
     }    
