@@ -10,49 +10,53 @@ package Codigo;
  * @author Ramso
  */
 public class Punto {
-    private double x;
-    private double y;
     private int id;
-
-    public Punto() {
-        x=0;
-        y=0;
-    }
+    private double x, y;
+    private double distMenor;
+    
     public Punto(int id, double x, double y){
-        this.id=id;
+        this.id = id;
         this.x=x;
         this.y=y;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Punto Coordenada(){
-        return this;
-    }
-
-    //Getters
+    
     public void setX(int x){
         this.x=x;
     }
     public void setY(int y){
         this.y=y;
     }
-    //Setters
+    
+    public int getID(){
+        return this.id;
+    }
     public double getX(){
         return this.x;
     }
     public double getY(){
         return this.y;
     }
-    public static double distancia(Punto p1, Punto p2){
-        return Math.sqrt(Math.sqrt(Math.pow(p1.getX()-p2.getId(), 2) + Math.sqrt(Math.pow(p1.getY() - p2.getY(), 2))));
+
+    public double getDistancia(Punto p2){
+        return Math.sqrt(Math.pow(this.x - p2.getX(), 2) + Math.pow(this.getY(), 2));
     }
-    public Double distancia(Punto p) {
-        return Punto.distancia(this, p);
+    
+    public void setDistanciaMenor(double distancia){ this.distMenor = distancia; }
+    public Double getDistMenor(){ return this.distMenor; }
+    
+    public String verCoordenadas(){
+        return "("+x+", "+y+")";
+    }
+    
+    public int DistanciaDisjk(Punto p2){
+        return (int)((((Math.sqrt(Math.pow(this.x - p2.x, 2) + Math.pow(this.y - p2.y, 2)))*100)%100)+1);
+    }
+    public boolean equal(Punto p){
+       if((this.id==p.id) && (this.x==p.getX()) && (this.y==p.getY())){
+           return true;
+       }
+       else{
+           return false;
+       }
     }
 }
