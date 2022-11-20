@@ -77,8 +77,10 @@ public class Principal extends javax.swing.JFrame {
     
     }
     public void mostrarDijkstra(){
+        long start1 = System.currentTimeMillis();
         alg.Dijkstra(puntos, Integer.valueOf(campoDijkstra.getText()));
-        
+        long end1 = System.currentTimeMillis();
+        System.out.println("Dijkstra\nTiempo: "+(((double)end1 - (double)start1)/1000));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,14 +101,14 @@ public class Principal extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
-        panelSel = new java.awt.Panel();
+        panelGuardar = new java.awt.Panel();
+        guardarSol = new javax.swing.JButton();
+        campoNameFich = new javax.swing.JTextField();
         comboFicheros = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         campoPuntos = new javax.swing.JTextField();
         generaPuntos = new javax.swing.JButton();
-        panelGuardar = new java.awt.Panel();
-        guardarSol = new javax.swing.JButton();
-        campoNameFich = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,57 +172,12 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(botonExhaustivo)
                 .addGap(18, 18, 18)
                 .addComponent(botonDyV)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoDijkstra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonDijkstra)
-                .addContainerGap())
-        );
-
-        label3.getAccessibleContext().setAccessibleName("Punto inicial:");
-
-        comboFicheros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboFicherosActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Nuevos puntos:");
-
-        generaPuntos.setText("Generar Puntos");
-        generaPuntos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generaPuntosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelSelLayout = new javax.swing.GroupLayout(panelSel);
-        panelSel.setLayout(panelSelLayout);
-        panelSelLayout.setHorizontalGroup(
-            panelSelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelSelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboFicheros, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelSelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(campoPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(generaPuntos))
-                .addContainerGap(61, Short.MAX_VALUE))
-        );
-        panelSelLayout.setVerticalGroup(
-            panelSelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(comboFicheros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(campoPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(generaPuntos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -238,7 +195,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGuardarLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(guardarSol)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(panelGuardarLayout.createSequentialGroup()
                 .addComponent(campoNameFich)
                 .addContainerGap())
@@ -253,6 +210,28 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
+        comboFicheros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboFicherosActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nuevos puntos:");
+
+        generaPuntos.setText("Generar Puntos");
+        generaPuntos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generaPuntosActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Comparar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -262,25 +241,44 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(panelGuardar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelSel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(39, 39, 39)
-                        .addComponent(panelAlgoritmos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboFicheros, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(campoPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(generaPuntos))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(panelAlgoritmos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(jButton1)))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(panelSel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboFicheros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoPuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(generaPuntos)
+                        .addGap(23, 23, 23)
                         .addComponent(panelGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(panelAlgoritmos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(panelAlgoritmos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -379,6 +377,107 @@ public class Principal extends javax.swing.JFrame {
         campoDijkstra.setText("");
     }//GEN-LAST:event_botonDijkstraActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        /* ejecuciones de 200, 500, 1500 y 5000*/
+        int a200=200, a500=500, a1500=1500, a5000=5000;
+        Punto[] p200 = new Punto[a200];
+        //nt=da;
+        for(int i=0; i<a200; i++){
+            double x = Math.random()*1000 + 1;
+            for(int j=0; j<a200; j++){
+                double y = Math.random()*1000 + 1;
+                p200[i]=new Punto(i,x,y);
+            }
+        }
+        Punto[] p500 = new Punto[a500];
+        //nt=da;
+        for(int i=0; i<a500; i++){
+            double x = Math.random()*1000 + 1;
+            for(int j=0; j<a500; j++){
+                double y = Math.random()*1000 + 1;
+                p500[i]=new Punto(i,x,y);
+            }
+        }
+        Punto[] p1500 = new Punto[a1500];
+        //nt=da;
+        for(int i=0; i<a1500; i++){
+            double x = Math.random()*1000 + 1;
+            for(int j=0; j<a1500; j++){
+                double y = Math.random()*1000 + 1;
+                p1500[i]=new Punto(i,x,y);
+            }
+        }
+        Punto[] p5000 = new Punto[a5000];
+        //nt=da;
+        for(int i=0; i<a5000; i++){
+            double x = Math.random()*1000 + 1;
+            for(int j=0; j<a5000; j++){
+                double y = Math.random()*1000 + 1;
+                p5000[i]=new Punto(i,x,y);
+            }
+        }
+        long start2, end2;
+        //System.out.println("          \t200\t\t500\t\t1500\t\t5000");
+        
+        start2 = System.currentTimeMillis();
+        alg.exhaustivo(p200);
+        end2 = System.currentTimeMillis();
+        System.out.print("Exhaustivo\t"+(((double)end2 - (double)start2)/1000)+"sg."); 
+        start2 = System.currentTimeMillis();
+        alg.exhaustivo(p500);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg."); 
+        start2 = System.currentTimeMillis();
+        alg.exhaustivo(p1500);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg."); 
+        start2 = System.currentTimeMillis();
+        alg.exhaustivo(p5000);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg."); 
+        System.out.println("\n\nfin");
+        //System.out.println("DyV");
+        /*
+        start2 = System.currentTimeMillis();
+        alg.DyV(p200);
+        end2 = System.currentTimeMillis();
+        System.out.print("\nDyV       \t"+(((double)end2 - (double)start2)/1000)+"sg.");
+        start2 = System.currentTimeMillis();
+        alg.DyV(p500);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg.");
+        start2 = System.currentTimeMillis();
+        alg.DyV(p1500);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg.");
+        start2 = System.currentTimeMillis();
+        alg.DyV(p5000);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg.");
+        
+        //System.out.println("Dijkstra");
+           
+        start2 = System.currentTimeMillis();
+        alg.DijkstraTime(p200,0);
+        end2 = System.currentTimeMillis();
+        System.out.print("\nDijkstra  \t"+(((double)end2 - (double)start2)/1000)+"sg.");
+        start2 = System.currentTimeMillis();
+        alg.DijkstraTime(p500,0);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg.");
+        start2 = System.currentTimeMillis();
+        alg.DijkstraTime(p1500,0);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg.");
+        start2 = System.currentTimeMillis();
+        alg.DijkstraTime(p5000,0);
+        end2 = System.currentTimeMillis();
+        System.out.print("\t\t"+(((double)end2 - (double)start2)/1000)+"sg.");
+        */
+        System.out.println("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -425,6 +524,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboFicheros;
     private javax.swing.JButton generaPuntos;
     private javax.swing.JButton guardarSol;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Label label1;
@@ -432,6 +532,5 @@ public class Principal extends javax.swing.JFrame {
     private java.awt.Label label3;
     private java.awt.Panel panelAlgoritmos;
     private java.awt.Panel panelGuardar;
-    private java.awt.Panel panelSel;
     // End of variables declaration//GEN-END:variables
 }

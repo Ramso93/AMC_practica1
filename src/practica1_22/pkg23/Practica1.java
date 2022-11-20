@@ -31,7 +31,7 @@ public class Practica1 {
         
         Algoritmo algoritmos=new Algoritmo();
         
-        /*
+        
         long start = System.currentTimeMillis();
         Triangulo sol=algoritmos.exhaustivo(puntos);
         long end = System.currentTimeMillis();
@@ -45,18 +45,18 @@ public class Practica1 {
         long end2 = System.currentTimeMillis();
        
         double time2 = (((double)end - (double)start)/1000);
-        System.out.println("DyV -> Tiempo : "+time2+" segundos");
-        System.out.println("Triangulo sol2: ");
+        System.out.println("\n\nDyV -> Tiempo : "+time2+" segundos");
+        System.out.println("Triangulo sol: ");
         System.out.println(" "+sol2.getPuntos());
-        */
+        
         
         //System.out.println("Ordenacion:");
         //puntos=algoritmos.ordenarPuntosQuickSort(puntos);
         //for(Punto p:puntos){ System.out.println(p.verCoordenadas()); }
         
         algoritmos.Dijkstra(puntos, 0);
-        guardarSolucion g = algoritmos.guardarDijkstra();
-        f.Guardar("prueba", g);
+        //guardarSolucion g = algoritmos.guardarDijkstra();
+        //f.Guardar("prueba", g);
     }
     
 }

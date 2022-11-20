@@ -184,6 +184,90 @@ public class Algoritmo {
         for(Punto p:puntos){ System.out.println(p.verCoordenadas()); }
     }
    */
+    public void DijkstraTime(Punto[] puntos, int inicio){
+        lista = new ArrayList<>();
+        int numeroPuntos = puntos.length;
+        
+        int[][] matrizAdyacencia = new int[puntos.length][puntos.length]; //Creo un grafo bidimensional que contenga las distancias entre los puntos
+        for (int i = 0; i < puntos.length; i++) {
+            for (int j = 0; j < puntos.length; j++) {
+                matrizAdyacencia[i][j] = puntos[i].DistanciaDisjk(puntos[j]);
+                if (i == j){
+                    matrizAdyacencia[i][j] = 0;
+                }
+            }
+        }
+
+        int[] distancias = new int[numeroPuntos]; //Array D con la distancia minima del punto de inicio al i
+
+        boolean[] visitado = new boolean[numeroPuntos]; //true si el punto ha sido visitado
+
+        //Inicializamos los valores de distancia a infinito (el integer mas grande) y todos los nodos como no visitados
+        for (int i = 0; i < numeroPuntos; i++) {
+            distancias[i] = Integer.MAX_VALUE;
+            visitado[i] = false;
+        }
+
+        distancias[inicio] = 0; //La distancia del nodo inicial a si mismo es 0
+
+        int[] anterior = new int[numeroPuntos]; //Array que contiene el nodo anterior al nodo "i"
+
+        anterior[inicio] = -1; //el punto inicial no tiene anterior
+
+        for (int i = 1; i < numeroPuntos; i++) {
+
+            int distanciaMinima = Integer.MAX_VALUE;
+            int indice_min = -1; //indice del punto con la distancia mas corta al inicio del conjunto de vertices no visitados
+
+            for (int j = 0; j < numeroPuntos; j++) {
+                if (distancias[j] < distanciaMinima && !visitado[j]) {
+                    distanciaMinima = distancias[j];
+                    indice_min = j;
+                }
+            }
+
+            visitado[indice_min] = true; //marcamos ese punto como visitado
+            
+            for (int j = 0; j < numeroPuntos; j++) {
+
+                if (matrizAdyacencia[indice_min][j] > 0 && ((distanciaMinima + matrizAdyacencia[indice_min][j]) < distancias[j])) {
+
+                    distancias[j] = distanciaMinima + matrizAdyacencia[indice_min][j];
+                    anterior[j] = indice_min;
+                }
+            }
+            
+        }
+
+        int total = 0;
+        for (int j = 0; j < distancias.length; j++) {
+            total = total + distancias[j];
+        }
+        
+        
+        /* LO SIGUIENTE SE PUEDE TACHAR */
+        /*
+        System.out.println();
+        System.out.print("Viaje\t\t Distancia\tCamino");
+
+        for (int i = 0; i < numeroPuntos; i++) {
+            if (i != inicio) {
+                System.out.print("\n" + inicio + " -> ");
+                if (i < 10) { //Condicion estetica
+                    System.out.print(i + " \t\t ");
+                } else {
+                    System.out.print(i + " \t ");
+                }
+                System.out.print(distancias[i] + "\t\t");
+                muestraCamino(i, anterior);
+
+            }
+        }
+        System.out.println();
+        System.out.println("Distancia total: " + total);
+        g = new guardarSolucion(distancias, anterior, inicio);
+        */
+    }
     public void Dijkstra(Punto[] puntos, int inicio){
         lista = new ArrayList<>();
         int numeroPuntos = puntos.length;
